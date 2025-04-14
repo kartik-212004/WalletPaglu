@@ -9,7 +9,10 @@ export default function Navbar() {
         className="font-bold text-3xl flex flex-row space-x-3 justify-center items-center"
       >
         <Bitcoin className="size-10" />
-        <span> Laxmi Crypto Funds</span>
+        <span className="flex flex-col">
+          <span> Laxmi Crypto Funds</span>
+          <span className="text-sm"> 21 din mai crypto double</span>
+        </span>
       </Link>
       <div className="w-[4vw]">
         <ModeToggle />
