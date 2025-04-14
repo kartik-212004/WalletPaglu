@@ -22,9 +22,9 @@ export default function Footer() {
 
       <div>
         <Image
-          width={80}
-          height={80}
-          src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGhyMWdvYW1qYTh2OXlnbmY3cGl4ZGlyMTNjZmtndWQxMWhyNWRoNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/W3fOvEAyRZ9TxDsf3Y/giphy.gif"
+          width={70}
+          height={70}
+          src="https://media.tenor.com/8Y1OBCtpf4AAAAAi/spider-man-no-way-home-marvel-studios.gif"
           alt=""
         />
       </div>

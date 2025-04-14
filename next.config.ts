@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "media1.giphy.com",
       },
+      {
+        hostname: "media.tenor.com",
+      },
     ],
   },
 };

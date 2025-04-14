@@ -7,6 +7,7 @@ export default function Wallet() {
     <motion.div
       initial={{ y: "-50%", opacity: 0 }}
       animate={{ y: "0", opacity: "100" }}
+      transition={{ duration: 0.5 }}
       className="space-y-2"
     >
       <div className="text-5xl font-bold">Secure Access Key</div>
@@ -16,10 +17,10 @@ export default function Wallet() {
       <div className="flex w-full items-center space-x-2">
         <Input
           type="password"
-          className="dark:bg-darkcolor"
-          placeholder="Enter your Private Key or ( leave it black to Generate one )"
+          className="dark:bg-darkcolor my-4 placeholder:text-neutral-400 placeholder:font-mono"
+          placeholder="Enter your Private Key or ( leave it blank to Generate )"
         />
-        <Button type="submit">Subscribe</Button>
+        <Button type="submit">Generate Wallet</Button>
       </div>
     </motion.div>
   );

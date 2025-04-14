@@ -40,7 +40,7 @@ export default function RootLayout({
           <Navbar />
           <div className="container flex-grow mx-auto w-[55%]">{children}</div>
           <Footer />
-          <Toaster />
+          <Toaster theme="system" />
         </ThemeProvider>
       </body>
     </html>
