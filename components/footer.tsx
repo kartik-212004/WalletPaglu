@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "motion/react";
 export default function Footer() {
@@ -20,8 +21,9 @@ export default function Footer() {
       </span>
 
       <div>
-        <img
-          className="w-20"
+        <Image
+          width={80}
+          height={80}
           src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNGhyMWdvYW1qYTh2OXlnbmY3cGl4ZGlyMTNjZmtndWQxMWhyNWRoNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/W3fOvEAyRZ9TxDsf3Y/giphy.gif"
           alt=""
         />
