@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 html {
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 @theme inline {
@@ -80,6 +80,10 @@ html {
   --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
+}
+
+.darkcolor {
+  background-color: hsl(24, 9.8%, 10%);
 }
 
 .dark {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/navbar";
+import { Toaster } from "sonner";
 import Footer from "@/components/footer";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -39,6 +40,7 @@ export default function RootLayout({
           <Navbar />
           <div className="container flex-grow mx-auto w-[55%]">{children}</div>
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
