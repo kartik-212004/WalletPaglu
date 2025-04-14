@@ -6,7 +6,11 @@ export const content = [
   "./node_modules/@heroui/theme/dist/components/(button|ripple|spinner).js",
 ];
 export const theme = {
-  extend: {},
+  extend: {
+    borderColor: {
+      'customgray': '#434952',
+    },
+  },
 };
 export const darkMode = "class";
 export const plugins = [heroui()];

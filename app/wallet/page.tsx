@@ -2,6 +2,7 @@
 import { motion } from "motion/react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 export default function Wallet() {
   return (
     <motion.div
@@ -20,7 +21,9 @@ export default function Wallet() {
           className="dark:bg-darkcolor my-4 placeholder:text-neutral-400 placeholder:font-mono"
           placeholder="Enter your Private Key or ( leave it blank to Generate )"
         />
-        <Button type="submit">Generate Wallet</Button>
+        <Link href={"/generate"}>
+          <Button type="button">Generate Wallet</Button>
+        </Link>
       </div>
     </motion.div>
   );

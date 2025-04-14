@@ -85,6 +85,9 @@ html {
 .darkcolor {
   background-color: hsl(24, 9.8%, 10%);
 }
+.borderColor {
+  border-color: #434952;
+}
 
 .dark {
   --background: 24 9.8% 10%;

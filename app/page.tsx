@@ -32,7 +32,18 @@ export default function Home() {
           >
             <Button className="text-sm font-mono">Enterium</Button>
           </Link>
-          <Link href={"/wallet"}>
+          <Link
+            onClick={() => {
+              toast("Solana Wallet Selected", {
+                description: new Date().toDateString(),
+                action: {
+                  label: "Undo",
+                  onClick: () => router.push("/"),
+                },
+              });
+            }}
+            href={"/wallet"}
+          >
             <Button className="text-sm font-mono">Solana</Button>
           </Link>
         </div>
