@@ -68,21 +68,21 @@ export default function Generate() {
         <div className="text-4xl font-semibold px-12 my-3 dark:text-zinc-200">
           Ethereum Wallet
         </div>
-        <div className="border dark:bg-neutral-800 bg-neutral-100 px-12 font-medium text-xl rounded-lg py-3 border-customgray space-y-3">
+        <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-12 font-medium text-xl rounded-lg py-3 border-customgray space-y-3">
           <div>
             <span>Public Key: </span>
-            <span className="text-xl break-all dark:text-gray-400">
+            <span className="text-base break-all dark:text-gray-400">
               {publicKey}
             </span>
           </div>
-          <div className="flex items-center">
+          <div className="flex font-mono items-center">
             <span>Private Key: </span>
-            <div className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-xl bg-transparent dark:text-gray-300">
+            <div className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base bg-transparent dark:text-gray-300">
               <input
                 type={showPrivateKey ? "text" : "password"}
                 value={privateKey ?? ""}
                 readOnly
-                className="w-full text-red-600 bg-transparent outline-none"
+                className="w-full bg-transparent outline-none"
               />
             </div>
             <button
