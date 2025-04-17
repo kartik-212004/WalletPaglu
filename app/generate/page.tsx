@@ -9,12 +9,14 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { ethers } from "ethers";
 import { useState, useEffect } from "react";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, Copy, EyeOff } from "lucide-react";
+import { toast } from "sonner";
 
 export default function Generate() {
   const [value, setValue] = useState<string | null>(null);
   const [publicKey, setPublicKey] = useState<string | null>(null);
   const [privateKey, setPrivateKey] = useState<string | null>(null);
+  const [mnemonics, setMnemonics] = useState<string[] | null>(null);
   const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
 
   const searchParams = useSearchParams();
@@ -29,6 +31,12 @@ export default function Generate() {
       const wallet = ethers.Wallet.createRandom();
       setPublicKey(wallet.address);
       setPrivateKey(wallet.privateKey);
+      const phrase = wallet.mnemonic?.phrase;
+      if (phrase) {
+        const wordsArray = phrase.split(" ");
+        setMnemonics(wordsArray);
+        console.log(wordsArray);
+      }
     } else {
       try {
         const wallet = new ethers.Wallet(params);
@@ -40,6 +48,20 @@ export default function Generate() {
       }
     }
   }, [params]);
+
+  const handleCopyMnemonics = () => {
+    if (!mnemonics) return;
+    const mnemonicString = mnemonics.join(" ");
+    navigator.clipboard
+      .writeText(mnemonicString)
+      .then(() => {
+        console.log("📋 Mnemonics copied to clipboard!");
+        toast("Copied To Clipboard");
+      })
+      .catch((err) => {
+        console.error("❌ Failed to copy mnemonics:", err);
+      });
+  };
 
   return (
     <div className="space-y-4">
@@ -54,7 +76,26 @@ export default function Generate() {
             <AccordionTrigger className="text-4xl font-semibold dark:text-zinc-200">
               Your Secret Mnemonics
             </AccordionTrigger>
-            <AccordionContent>{value ?? "Loading..."}</AccordionContent>
+            <AccordionContent>
+              <div className="grid grid-cols-4 gap-2 text-centergrid-rows-3">
+                {mnemonics?.map((e, i) => (
+                  <div
+                    className="dark:bg-neutral-800 bg-neutral-100 flex justify-center text-2xl dark:text-neutral-200 items-center rounded-lg h-12"
+                    key={i}
+                  >
+                    {e}
+                  </div>
+                ))}
+                <div className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium">
+                  <button
+                    onClick={handleCopyMnemonics}
+                    className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium hover:opacity-80 transition"
+                  >
+                    <span>Copy to Clipboard</span> <Copy size={18} />
+                  </button>
+                </div>
+              </div>
+            </AccordionContent>
           </AccordionItem>
         </Accordion>
       </motion.div>
@@ -68,7 +109,7 @@ export default function Generate() {
         <div className="text-4xl font-semibold px-12 my-3 dark:text-zinc-200">
           Ethereum Wallet
         </div>
-        <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-12 font-medium text-xl rounded-lg py-3 border-customgray space-y-3">
+        <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-12 font-normal text-xl rounded-lg py-3 border-customgray space-y-3">
           <div>
             <span>Public Key: </span>
             <span className="text-base break-all dark:text-gray-400">
@@ -82,12 +123,12 @@ export default function Generate() {
                 type={showPrivateKey ? "text" : "password"}
                 value={privateKey ?? ""}
                 readOnly
-                className="w-full bg-transparent outline-none"
+                className="w-full dark:text-gray-400 bg-transparent outline-none"
               />
             </div>
             <button
               onClick={() => setShowPrivateKey(!showPrivateKey)}
-              className="ml-2 text-gray-600 hover:text-black transition"
+              className="ml-2 hover:text-gray-300 text-white transition"
             >
               {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
