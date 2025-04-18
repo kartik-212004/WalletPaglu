@@ -1,8 +1,8 @@
-# Laxmi Crypto Wallet
+# Laxmi Crypto Wallet ![Laxmi Crypto Wallet](https://laxmicryptofunds.vercel.app/favicon.ico)
 
 A secure, client-side cryptocurrency wallet for Ethereum and Solana blockchains.
 
-![Laxmi Crypto Wallet](https://via.placeholder.com/600x300/1a1a2e/ffffff?text=Laxmi+Crypto+Wallet)
+
 
 ## Features
 
@@ -37,12 +37,14 @@ A secure, client-side cryptocurrency wallet for Ethereum and Solana blockchains.
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/walletpaglu.git
 cd walletpaglu
 ```
 
 2. Install dependencies
+
 ```bash
 npm install -g pnpm
 
@@ -50,16 +52,17 @@ pnpm install
 ```
 
 3. Run the development server
+
 ```bash
 pnpm dev
 ```
 
 4. Build for production
+
 ```bash
 pnpm build
 pnpm start
 ```
-
 
 ## Usage
 
@@ -97,8 +100,6 @@ This wallet is designed for educational purposes. While we've implemented variou
 - Be cautious when entering your private key on any website
 - For maximum security, consider hardware wallets for large amounts
 
-
-
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
