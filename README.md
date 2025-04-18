@@ -102,4 +102,4 @@ This wallet is designed for educational purposes. While we've implemented variou
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
