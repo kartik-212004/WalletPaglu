@@ -312,7 +312,7 @@ function GenerateContent() {
             </div>
             <button
               onClick={() => setShowPrivateKey(!showPrivateKey)}
-              className="ml-2 hover:text-gray-300 text-white transition"
+              className="ml-2 dark:hover:text-gray-300 dark:text-white text-black hover:text-gray-950 transition"
             >
               {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
             </button>
