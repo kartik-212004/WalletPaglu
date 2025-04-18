@@ -2,7 +2,8 @@
 
 A secure, client-side cryptocurrency wallet for Ethereum and Solana blockchains.
 
-![Laxmi Crypto Wallet](https://via.placeholder.com/600x300/1a1a2e/ffffff?text=Laxmi+Crypto+Wallet)
+![Laxmi Crypto Wallet]([https://via.placeholder.com/600x300/1a1a2e/ffffff?text=Laxmi+Crypto+Wallet](https://laxmicryptofunds.vercel.app/favicon.ico
+))
 
 ## Features
 
