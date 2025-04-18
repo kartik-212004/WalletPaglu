@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -8,19 +9,28 @@ import {
 import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
 import { ethers } from "ethers";
-import { useState, useEffect } from "react";
-import { Eye, Copy, EyeOff, RefreshCw, Trash2, AlertTriangle, Save } from "lucide-react";
+import { useState, useEffect, Suspense } from "react";
+import {
+  Eye,
+  Copy,
+  EyeOff,
+  RefreshCw,
+  Trash2,
+  AlertTriangle,
+  Save,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { setCookie, getCookie, deleteCookie } from 'cookies-next';
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
 
-export default function Generate() {
+function GenerateContent() {
   const [publicKey, setPublicKey] = useState<string | null>(null);
   const [privateKey, setPrivateKey] = useState<string | null>(null);
   const [mnemonics, setMnemonics] = useState<string[] | null>(null);
   const [showPrivateKey, setShowPrivateKey] = useState<boolean>(false);
-  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState<boolean>(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] =
+    useState<boolean>(false);
   const router = useRouter();
 
   const searchParams = useSearchParams();
@@ -30,29 +40,36 @@ export default function Generate() {
     if (typeof window !== "undefined") {
       const cookiePublicKey = getCookie("public_key") as string | undefined;
       const cookiePrivateKey = getCookie("private_key") as string | undefined;
-      
+
       if (cookiePublicKey && cookiePrivateKey) {
         setPublicKey(cookiePublicKey);
         setPrivateKey(cookiePrivateKey);
         console.log("Wallet loaded from cookies:", cookiePublicKey);
-        
+
         localStorage.setItem("public_key", cookiePublicKey);
         localStorage.setItem("private_key", cookiePrivateKey);
-        
+
         if (!params) return;
       } else {
         const storedPublicKey = localStorage.getItem("public_key");
         const storedPrivateKey = localStorage.getItem("private_key");
-        
+
         if (storedPublicKey && storedPrivateKey) {
           setPublicKey(storedPublicKey);
           setPrivateKey(storedPrivateKey);
-          
-          setCookie("public_key", storedPublicKey, { maxAge: 60 * 60 * 24 * 30 });
-          setCookie("private_key", storedPrivateKey, { maxAge: 60 * 60 * 24 * 30 });
-          
-          console.log("✅ Wallet loaded from localStorage and synced to cookies:", storedPublicKey);
-          
+
+          setCookie("public_key", storedPublicKey, {
+            maxAge: 60 * 60 * 24 * 30,
+          });
+          setCookie("private_key", storedPrivateKey, {
+            maxAge: 60 * 60 * 24 * 30,
+          });
+
+          console.log(
+            "✅ Wallet loaded from localStorage and synced to cookies:",
+            storedPublicKey
+          );
+
           if (!params) return;
         } else if (!params) {
           router.push("/");
@@ -67,12 +84,14 @@ export default function Generate() {
       const wallet = ethers.Wallet.createRandom();
       setPublicKey(wallet.address);
       setPrivateKey(wallet.privateKey);
-      
+
       localStorage.setItem("public_key", wallet.address);
       localStorage.setItem("private_key", wallet.privateKey);
       setCookie("public_key", wallet.address, { maxAge: 60 * 60 * 24 * 30 });
-      setCookie("private_key", wallet.privateKey, { maxAge: 60 * 60 * 24 * 30 });
-      
+      setCookie("private_key", wallet.privateKey, {
+        maxAge: 60 * 60 * 24 * 30,
+      });
+
       const phrase = wallet.mnemonic?.phrase;
       if (phrase) {
         const wordsArray = phrase.split(" ");
@@ -87,8 +106,10 @@ export default function Generate() {
         setPrivateKey(wallet.privateKey);
         localStorage.setItem("public_key", wallet.address);
         localStorage.setItem("private_key", wallet.privateKey);
-        setCookie("public_key", wallet.address, { maxAge: 60 * 60 * 24 * 30 }); 
-        setCookie("private_key", wallet.privateKey, { maxAge: 60 * 60 * 24 * 30 });
+        setCookie("public_key", wallet.address, { maxAge: 60 * 60 * 24 * 30 });
+        setCookie("private_key", wallet.privateKey, {
+          maxAge: 60 * 60 * 24 * 30,
+        });
       } catch (error) {
         console.error("Invalid private key:", error);
       }
@@ -142,7 +163,8 @@ export default function Generate() {
     if (!privateKey) return;
     try {
       toast("Recovery phrase can only be shown for newly created wallets", {
-        description: "For security, we cannot recover the original phrase for imported wallets."
+        description:
+          "For security, we cannot recover the original phrase for imported wallets.",
       });
     } catch (error) {
       console.error("Error regenerating mnemonics:", error);
@@ -155,7 +177,7 @@ export default function Generate() {
     localStorage.removeItem("private_key");
     deleteCookie("public_key");
     deleteCookie("private_key");
-    
+
     toast("Wallet data cleared from all storage");
     router.push("/");
   };
@@ -165,7 +187,7 @@ export default function Generate() {
     localStorage.removeItem("private_key");
     deleteCookie("public_key");
     deleteCookie("private_key");
-    
+
     router.push("/wallet");
   };
 
@@ -174,31 +196,31 @@ export default function Generate() {
       toast.error("No wallet data to backup");
       return;
     }
-    
+
     try {
       const walletData = {
         publicKey,
         privateKey,
         createdAt: new Date().toISOString(),
-        network: "Ethereum"
+        network: "Ethereum",
       };
-      
+
       const jsonData = JSON.stringify(walletData, null, 2);
-      
+
       const blob = new Blob([jsonData], { type: "application/json" });
       const url = URL.createObjectURL(blob);
-      
+
       const link = document.createElement("a");
       link.href = url;
       link.download = `wallet-backup-${publicKey.substring(0, 8)}.json`;
       document.body.appendChild(link);
       link.click();
-      
+
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
-      
+
       toast.success("Wallet backup file created", {
-        description: "Store this file securely and never share it"
+        description: "Store this file securely and never share it",
       });
     } catch (error) {
       console.error("Failed to backup wallet:", error);
@@ -315,12 +337,13 @@ export default function Generate() {
             Recovery Phrase Information
           </div>
           <p className="text-gray-500 dark:text-gray-400 mb-4">
-            Your recovery phrase is only available when you first create a wallet. 
-            For security reasons, we cannot recover it from an existing private key.
+            Your recovery phrase is only available when you first create a
+            wallet. For security reasons, we cannot recover it from an
+            existing private key.
           </p>
-          <Button 
+          <Button
             onClick={regenerateMnemonics}
-            variant="outline" 
+            variant="outline"
             className="flex items-center gap-2"
           >
             <RefreshCw size={16} /> Show Recovery Info
@@ -328,7 +351,6 @@ export default function Generate() {
         </motion.div>
       )}
 
-      {/* Delete confirmation overlay - show when delete is clicked */}
       {showDeleteConfirmation && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -342,19 +364,15 @@ export default function Generate() {
               <h3 className="text-xl font-bold">Delete Wallet</h3>
             </div>
             <p className="mb-4 dark:text-gray-300">
-              Are you sure you want to delete this wallet? This action cannot be undone, and you will lose access to this wallet unless you have backed up your private key or recovery phrase.
+              Are you sure you want to delete this wallet? This action cannot
+              be undone, and you will lose access to this wallet unless you
+              have backed up your private key or recovery phrase.
             </p>
             <div className="flex space-x-3 justify-end">
-              <Button
-                variant="outline"
-                onClick={handleCancelDelete}
-              >
+              <Button variant="outline" onClick={handleCancelDelete}>
                 Cancel
               </Button>
-              <Button
-                variant="destructive"
-                onClick={clearWalletData}
-              >
+              <Button variant="destructive" onClick={clearWalletData}>
                 Delete Wallet
               </Button>
             </div>
@@ -364,31 +382,39 @@ export default function Generate() {
 
       <div className="flex justify-between mt-4">
         <div className="flex gap-2">
-          <Button 
+          <Button
             onClick={handleDeleteClick}
-            variant="destructive" 
+            variant="destructive"
             className="flex items-center gap-2"
           >
             <Trash2 size={16} /> Delete Wallet
           </Button>
-          
-          <Button 
+
+          <Button
             onClick={backupWallet}
-            variant="secondary" 
+            variant="secondary"
             className="flex items-center gap-2"
           >
             <Save size={16} /> Backup Wallet
           </Button>
         </div>
-        
-        <Button 
+
+        <Button
           onClick={createNewWallet}
-          variant="outline" 
+          variant="outline"
           className="flex items-center gap-2"
         >
           <RefreshCw size={16} /> Create New Wallet
         </Button>
       </div>
     </div>
+  );
+}
+
+export default function Generate() {
+  return (
+    <Suspense fallback={<div className="p-4">Loading wallet details...</div>}>
+      <GenerateContent />
+    </Suspense>
   );
 }
