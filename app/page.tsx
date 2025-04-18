@@ -5,12 +5,24 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useEffect } from "react";
+import { getCookie } from 'cookies-next';
 
 export default function Home() {
   const router = useRouter();
   useEffect(() => {
-    if (localStorage.getItem("public_key")) {
-      router.push("/generate");
+    if (typeof window !== "undefined") {
+      const cookiePublicKey = getCookie("public_key");
+      
+      if (cookiePublicKey) {
+        console.log("✅ Wallet found in cookies");
+        router.push("/generate");
+        return;
+      }
+      
+      if (localStorage.getItem("public_key")) {
+        console.log("✅ Wallet found in localStorage");
+        router.push("/generate");
+      }
     }
   }, [router]);
 
