@@ -4,9 +4,16 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { useEffect } from "react";
 
 export default function Home() {
   const router = useRouter();
+  useEffect(() => {
+    if (localStorage.getItem("public_key")) {
+      router.push("/generate");
+    }
+  }, [router]);
+
   return (
     <motion.div
       initial={{ y: "-50%", opacity: 0 }}

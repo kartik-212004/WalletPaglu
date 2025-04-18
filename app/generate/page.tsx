@@ -24,6 +24,14 @@ export default function Generate() {
   useEffect(() => {
     if (!params) return;
 
+    if (
+      localStorage.getItem("public_key") &&
+      localStorage.getItem("private_key")
+    ) {
+      setPublicKey(localStorage.getItem("public_key"));
+      setPrivateKey(localStorage.getItem("private_key"));
+      return;
+    }
     if (params === "createnewwallet") {
       const wallet = ethers.Wallet.createRandom();
       setPublicKey(wallet.address);
@@ -40,8 +48,10 @@ export default function Generate() {
         console.log("✅ Wallet verified!");
         setPublicKey(wallet.address);
         setPrivateKey(wallet.privateKey);
+        localStorage.setItem("public_key", wallet.address);
+        localStorage.setItem("private_key", wallet.privateKey);
       } catch (error) {
-        console.error("❌ Invalid private key:", error);
+        console.error("Invalid private key:", error);
       }
     }
   }, [params]);
@@ -76,7 +86,7 @@ export default function Generate() {
                 Your Secret Mnemonics
               </AccordionTrigger>
               <AccordionContent>
-                <div className="grid grid-cols-4 gap-2 text-centergrid-rows-3">
+                <div className="grid grid-cols-4 grid-rows-3 gap-2 text-center">
                   {mnemonics?.map((e, i) => (
                     <div
                       onClick={handleCopyMnemonics}
