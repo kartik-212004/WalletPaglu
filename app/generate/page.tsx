@@ -59,6 +59,7 @@ export default function Generate() {
         toast("Copied To Clipboard");
       })
       .catch((err) => {
+        toast("Failed to Copy");
         console.error("❌ Failed to copy mnemonics:", err);
       });
   };

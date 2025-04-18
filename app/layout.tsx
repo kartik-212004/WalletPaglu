@@ -3,6 +3,11 @@ import Navbar from "@/components/navbar";
 import { Toaster } from "sonner";
 import Footer from "@/components/footer";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito_Sans, Roboto, Kumbh_Sans } from "next/font/google";
+
+const nunito = Nunito_Sans({ subsets: ["latin"], variable: "--font-nunito" });
+const roboto = Roboto({ subsets: ["latin"], variable: "--font-roboto" });
+const kumbh = Kumbh_Sans({ subsets: ["latin"], variable: "--font-kumbh" });
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -29,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${nunito.variable} ${roboto.variable} ${kumbh.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider
           attribute="class"
