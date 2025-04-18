@@ -1,6 +1,6 @@
 # Laxmi Crypto Wallet ![Laxmi Crypto Wallet](https://laxmicryptofunds.vercel.app/favicon.ico)
 
-A secure, client-side cryptocurrency wallet for Ethereum and Solana blockchains.
+A secure, client-side cryptocurrency wallet for Ethereum and Solana blockchains. 
 
 
 
