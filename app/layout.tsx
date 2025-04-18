@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/navbar";
 import { Toaster } from "sonner";
 import Footer from "@/components/footer";
-import { Geist, Geist_Mono } from "next/font/google";
+// import { Geist, Geist_Mono } from "next/font/google";
 import { Nunito_Sans, Roboto, Kumbh_Sans } from "next/font/google";
 
 const nunito = Nunito_Sans({ subsets: ["latin"], variable: "--font-nunito" });
@@ -11,15 +11,15 @@ const kumbh = Kumbh_Sans({ subsets: ["latin"], variable: "--font-kumbh" });
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "Laxmi Crypto Funds",

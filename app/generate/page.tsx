@@ -13,7 +13,6 @@ import { Eye, Copy, EyeOff } from "lucide-react";
 import { toast } from "sonner";
 
 export default function Generate() {
-  const [value, setValue] = useState<string | null>(null);
   const [publicKey, setPublicKey] = useState<string | null>(null);
   const [privateKey, setPrivateKey] = useState<string | null>(null);
   const [mnemonics, setMnemonics] = useState<string[] | null>(null);
@@ -24,8 +23,6 @@ export default function Generate() {
 
   useEffect(() => {
     if (!params) return;
-
-    setValue(params);
 
     if (params === "createnewwallet") {
       const wallet = ethers.Wallet.createRandom();
@@ -66,40 +63,43 @@ export default function Generate() {
 
   return (
     <div className="space-y-4">
-      <motion.div
-        initial={{ y: "-50%", opacity: 0 }}
-        animate={{ y: "0%", opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className="border border-customgray py-4 px-12 rounded-2xl"
-      >
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="text-4xl font-semibold dark:text-zinc-200">
-              Your Secret Mnemonics
-            </AccordionTrigger>
-            <AccordionContent>
-              <div className="grid grid-cols-4 gap-2 text-centergrid-rows-3">
-                {mnemonics?.map((e, i) => (
-                  <div
-                    className="dark:bg-neutral-800 bg-neutral-100 flex justify-center text-2xl dark:text-neutral-200 items-center rounded-lg h-12"
-                    key={i}
-                  >
-                    {e}
+      {mnemonics && (
+        <motion.div
+          initial={{ y: "-50%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          className="border border-customgray py-4 px-12 rounded-2xl"
+        >
+          <Accordion type="single" collapsible>
+            <AccordionItem value="item-1">
+              <AccordionTrigger className="text-4xl font-semibold dark:text-zinc-200">
+                Your Secret Mnemonics
+              </AccordionTrigger>
+              <AccordionContent>
+                <div className="grid grid-cols-4 gap-2 text-centergrid-rows-3">
+                  {mnemonics?.map((e, i) => (
+                    <div
+                      onClick={handleCopyMnemonics}
+                      className="dark:bg-neutral-800 bg-neutral-100 flex justify-center text-2xl dark:text-neutral-200 items-center rounded-lg h-12"
+                      key={i}
+                    >
+                      {e}
+                    </div>
+                  ))}
+                  <div className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium">
+                    <button
+                      onClick={handleCopyMnemonics}
+                      className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium hover:opacity-80 transition"
+                    >
+                      <span>Copy to Clipboard</span> <Copy size={18} />
+                    </button>
                   </div>
-                ))}
-                <div className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium">
-                  <button
-                    onClick={handleCopyMnemonics}
-                    className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium hover:opacity-80 transition"
-                  >
-                    <span>Copy to Clipboard</span> <Copy size={18} />
-                  </button>
                 </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </motion.div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </motion.div>
+      )}
 
       <motion.div
         initial={{ y: "-50%", opacity: 0 }}
