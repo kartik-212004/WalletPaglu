@@ -147,16 +147,18 @@ function GenerateContent() {
 
   const handleCopyPrivateKey = () => {
     if (!privateKey) return;
-    navigator.clipboard
-      .writeText(privateKey)
-      .then(() => {
-        console.log("📋 Private key copied to clipboard!");
-        toast("Private Key Copied To Clipboard");
-      })
-      .catch((err) => {
-        toast.error("Failed to Copy");
-        console.error("❌ Failed to copy private key:", err);
-      });
+    if (showPrivateKey) {
+      navigator.clipboard
+        .writeText(privateKey)
+        .then(() => {
+          console.log("📋 Private key copied to clipboard!");
+          toast("Private Key Copied To Clipboard");
+        })
+        .catch((err) => {
+          toast.error("Failed to Copy");
+          console.error("❌ Failed to copy private key:", err);
+        });
+    }
   };
 
   const regenerateMnemonics = () => {
@@ -288,20 +290,19 @@ function GenerateContent() {
         <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-12 font-normal text-xl rounded-lg py-3 border-customgray space-y-3">
           <div className="flex items-center">
             <span>Public Key: </span>
-            <div className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base dark:text-gray-400">
+            <div
+              onClick={handleCopyPublicKey}
+              className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base dark:text-gray-400"
+            >
               {publicKey}
             </div>
-            <button
-              onClick={handleCopyPublicKey}
-              className="ml-2 hover:text-gray-300 text-white transition"
-              title="Copy public key"
-            >
-              <Copy size={20} />
-            </button>
           </div>
           <div className="flex font-mono items-center">
             <span>Private Key: </span>
-            <div className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base bg-transparent dark:text-gray-300">
+            <div
+              onClick={handleCopyPrivateKey}
+              className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base bg-transparent dark:text-gray-300"
+            >
               <input
                 type={showPrivateKey ? "text" : "password"}
                 value={privateKey ?? ""}
@@ -314,13 +315,6 @@ function GenerateContent() {
               className="ml-2 hover:text-gray-300 text-white transition"
             >
               {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
-            <button
-              onClick={handleCopyPrivateKey}
-              className="ml-2 hover:text-gray-300 text-white transition"
-              title="Copy private key"
-            >
-              <Copy size={20} />
             </button>
           </div>
         </div>
@@ -338,8 +332,8 @@ function GenerateContent() {
           </div>
           <p className="text-gray-500 dark:text-gray-400 mb-4">
             Your recovery phrase is only available when you first create a
-            wallet. For security reasons, we cannot recover it from an
-            existing private key.
+            wallet. For security reasons, we cannot recover it from an existing
+            private key.
           </p>
           <Button
             onClick={regenerateMnemonics}
@@ -364,9 +358,9 @@ function GenerateContent() {
               <h3 className="text-xl font-bold">Delete Wallet</h3>
             </div>
             <p className="mb-4 dark:text-gray-300">
-              Are you sure you want to delete this wallet? This action cannot
-              be undone, and you will lose access to this wallet unless you
-              have backed up your private key or recovery phrase.
+              Are you sure you want to delete this wallet? This action cannot be
+              undone, and you will lose access to this wallet unless you have
+              backed up your private key or recovery phrase.
             </p>
             <div className="flex space-x-3 justify-end">
               <Button variant="outline" onClick={handleCancelDelete}>
