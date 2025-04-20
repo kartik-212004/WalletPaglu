@@ -245,28 +245,28 @@ function GenerateContent() {
           initial={{ y: "-50%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="border border-customgray py-4 px-12 rounded-2xl"
+          className="border border-customgray py-4 px-4 sm:px-8 md:px-12 rounded-2xl"
         >
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger className="text-4xl font-semibold dark:text-zinc-200">
+              <AccordionTrigger className="text-2xl sm:text-3xl md:text-4xl font-semibold dark:text-zinc-200">
                 Your Secret Mnemonics
               </AccordionTrigger>
               <AccordionContent>
-                <div className="grid grid-cols-4 grid-rows-3 gap-2 text-center">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-center">
                   {mnemonics?.map((e, i) => (
                     <div
                       onClick={handleCopyMnemonics}
-                      className="dark:bg-neutral-800 bg-neutral-100 flex justify-center text-2xl dark:text-neutral-200 items-center rounded-lg h-12"
+                      className="dark:bg-neutral-800 bg-neutral-100 flex justify-center text-base sm:text-xl md:text-2xl dark:text-neutral-200 items-center rounded-lg h-12"
                       key={i}
                     >
                       {e}
                     </div>
                   ))}
-                  <div className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium">
+                  <div className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-base sm:text-lg font-medium">
                     <button
                       onClick={handleCopyMnemonics}
-                      className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-lg font-medium hover:opacity-80 transition"
+                      className="mt-3 dark:text-neutral-300 flex flex-row space-x-2 items-center text-base sm:text-lg font-medium hover:opacity-80 transition"
                     >
                       <span>Copy to Clipboard</span> <Copy size={18} />
                     </button>
@@ -284,24 +284,24 @@ function GenerateContent() {
         transition={{ duration: 0.5 }}
         className="border border-customgray pt-4 rounded-2xl"
       >
-        <div className="text-4xl font-semibold px-12 my-3 dark:text-zinc-200">
+        <div className="text-2xl sm:text-3xl md:text-4xl font-semibold px-4 sm:px-8 md:px-12 my-3 dark:text-zinc-200">
           Ethereum Wallet
         </div>
-        <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-12 font-normal text-xl rounded-lg py-3 border-customgray space-y-3">
-          <div className="flex items-center">
-            <span>Public Key: </span>
+        <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-4 sm:px-8 md:px-12 font-normal text-base sm:text-lg md:text-xl rounded-lg py-3 border-customgray space-y-3">
+          <div className="flex items-center flex-wrap">
+            <span className="mr-2">Public Key: </span>
             <div
               onClick={handleCopyPublicKey}
-              className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base dark:text-gray-400"
+              className="w-full md:w-auto md:flex-1 overflow-x-auto whitespace-nowrap text-xs sm:text-sm md:text-base dark:text-gray-400 break-all"
             >
               {publicKey}
             </div>
           </div>
-          <div className="flex font-mono items-center">
-            <span>Private Key: </span>
+          <div className="flex font-mono items-center flex-wrap">
+            <span className="mr-2">Private Key: </span>
             <div
               onClick={handleCopyPrivateKey}
-              className="ml-2 flex-1 overflow-x-auto whitespace-nowrap text-base bg-transparent dark:text-gray-300"
+              className="w-full md:w-auto md:flex-1 overflow-x-auto whitespace-nowrap text-xs sm:text-sm md:text-base bg-transparent dark:text-gray-300"
             >
               <input
                 type={showPrivateKey ? "text" : "password"}
@@ -310,12 +310,14 @@ function GenerateContent() {
                 className="w-full dark:text-gray-400 bg-transparent outline-none"
               />
             </div>
-            <button
-              onClick={() => setShowPrivateKey(!showPrivateKey)}
-              className="ml-2 dark:hover:text-gray-300 dark:text-white text-black hover:text-gray-950 transition"
-            >
-              {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
-            </button>
+            <div className="ml-auto flex space-x-2">
+              <button
+                onClick={() => setShowPrivateKey(!showPrivateKey)}
+                className="dark:hover:text-gray-300 dark:text-white text-black hover:text-gray-950 transition"
+              >
+                {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -325,12 +327,12 @@ function GenerateContent() {
           initial={{ y: "-50%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="border border-customgray py-4 px-12 rounded-2xl mt-4"
+          className="border border-customgray py-4 px-4 sm:px-8 md:px-12 rounded-2xl mt-4"
         >
-          <div className="text-2xl font-semibold dark:text-zinc-200 mb-3">
+          <div className="text-xl sm:text-2xl font-semibold dark:text-zinc-200 mb-3">
             Recovery Phrase Information
           </div>
-          <p className="text-gray-500 dark:text-gray-400 mb-4">
+          <p className="text-gray-500 dark:text-gray-400 mb-4 text-sm sm:text-base">
             Your recovery phrase is only available when you first create a
             wallet. For security reasons, we cannot recover it from an existing
             private key.
@@ -338,7 +340,7 @@ function GenerateContent() {
           <Button
             onClick={regenerateMnemonics}
             variant="outline"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-full sm:w-auto"
           >
             <RefreshCw size={16} /> Show Recovery Info
           </Button>
@@ -350,23 +352,31 @@ function GenerateContent() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center"
+          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
         >
-          <div className="bg-white dark:bg-neutral-900 p-8 rounded-lg max-w-md w-full">
+          <div className="bg-white dark:bg-neutral-900 p-4 sm:p-6 md:p-8 rounded-lg max-w-md w-full">
             <div className="flex items-center mb-4 text-red-500">
-              <AlertTriangle size={24} className="mr-2" />
-              <h3 className="text-xl font-bold">Delete Wallet</h3>
+              <AlertTriangle size={20} className="mr-2 flex-shrink-0" />
+              <h3 className="text-lg sm:text-xl font-bold">Delete Wallet</h3>
             </div>
-            <p className="mb-4 dark:text-gray-300">
+            <p className="mb-4 dark:text-gray-300 text-sm sm:text-base">
               Are you sure you want to delete this wallet? This action cannot be
               undone, and you will lose access to this wallet unless you have
               backed up your private key or recovery phrase.
             </p>
-            <div className="flex space-x-3 justify-end">
-              <Button variant="outline" onClick={handleCancelDelete}>
+            <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 sm:justify-end">
+              <Button 
+                variant="outline" 
+                onClick={handleCancelDelete}
+                className="w-full sm:w-auto"
+              >
                 Cancel
               </Button>
-              <Button variant="destructive" onClick={clearWalletData}>
+              <Button 
+                variant="destructive" 
+                onClick={clearWalletData}
+                className="w-full sm:w-auto"
+              >
                 Delete Wallet
               </Button>
             </div>
@@ -374,12 +384,12 @@ function GenerateContent() {
         </motion.div>
       )}
 
-      <div className="flex justify-between mt-4">
-        <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row justify-between mt-4 gap-3 sm:gap-0">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 w-full sm:w-auto">
           <Button
             onClick={handleDeleteClick}
             variant="destructive"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-full sm:w-auto"
           >
             <Trash2 size={16} /> Delete Wallet
           </Button>
@@ -387,7 +397,7 @@ function GenerateContent() {
           <Button
             onClick={backupWallet}
             variant="secondary"
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 w-full sm:w-auto"
           >
             <Save size={16} /> Backup Wallet
           </Button>
@@ -396,7 +406,7 @@ function GenerateContent() {
         <Button
           onClick={createNewWallet}
           variant="outline"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 w-full sm:w-auto"
         >
           <RefreshCw size={16} /> Create New Wallet
         </Button>

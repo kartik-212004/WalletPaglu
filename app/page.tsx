@@ -33,10 +33,10 @@ export default function Home() {
       transition={{ duration: 0.5 }}
       className="text-primary"
     >
-      <div className="space-y-2">
-        <div className="text-5xl  font-bold">Supported Blockchains</div>
-        <div className="text-2xl dark:text-gray-400">Choose A Blockchain</div>
-        <div className="flex flex-row space-x-3">
+      <div className="space-y-4">
+        <div className="text-3xl sm:text-4xl md:text-5xl font-bold">Supported Blockchains</div>
+        <div className="text-xl sm:text-2xl dark:text-gray-400">Choose A Blockchain</div>
+        <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
           <Link
             onClick={() => {
               toast("Enterium Wallet Selected", {
@@ -48,8 +48,9 @@ export default function Home() {
               });
             }}
             href={"/wallet"}
+            className="w-full sm:w-auto"
           >
-            <Button className="text-sm font-mono">Enterium</Button>
+            <Button className="text-sm font-mono w-full sm:w-auto">Enterium</Button>
           </Link>
           <Link
             onClick={() => {
@@ -62,8 +63,9 @@ export default function Home() {
               });
             }}
             href={"/wallet"}
+            className="w-full sm:w-auto"
           >
-            <Button className="text-sm font-mono">Solana</Button>
+            <Button className="text-sm font-mono w-full sm:w-auto">Solana</Button>
           </Link>
         </div>
       </div>

@@ -116,21 +116,21 @@ export default function Wallet() {
       transition={{ duration: 0.5 }}
       className="space-y-2"
     >
-      <div className="text-5xl font-bold">Secure Access Key</div>
-      <div className="text-2xl dark:text-gray-300 font-medium">
+      <div className="text-3xl sm:text-4xl md:text-5xl font-bold">Secure Access Key</div>
+      <div className="text-xl sm:text-2xl dark:text-gray-300 font-medium">
         This phrase is your key. Store it securely and never share it.
       </div>
-      <div className="flex w-full items-center space-x-2">
+      <div className="flex flex-col sm:flex-row w-full items-center space-y-3 sm:space-y-0 sm:space-x-2">
         <Input
           onChange={(e) => {
             setValue(e.target.value || "createnewwallet");
           }}
           type="password"
-          className="dark:bg-darkcolor my-4 placeholder:text-neutral-400 placeholder:font-mono"
+          className="dark:bg-darkcolor my-4 placeholder:text-neutral-400 placeholder:font-mono w-full"
           placeholder="Enter your Private Key or (leave it blank to Generate)"
         />
-        <Link href={`/generate/?private_key=${value}`}>
-          <Button type="button">Generate Wallet</Button>
+        <Link href={`/generate/?private_key=${value}`} className="w-full sm:w-auto">
+          <Button type="button" className="w-full sm:w-auto">Generate Wallet</Button>
         </Link>
       </div>
       
@@ -152,7 +152,7 @@ export default function Wallet() {
           onClick={triggerFileUpload}
           variant="secondary"
           disabled={isUploading}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 w-full sm:w-auto"
         >
           <Upload size={16} />
           {isUploading ? "Importing..." : "Import Wallet Backup"}
