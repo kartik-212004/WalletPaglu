@@ -23,8 +23,8 @@ export default function Footer() {
       <div>
         <Image
           unoptimized
-          width={70}
-          height={70}
+          width={50}
+          height={50}
           src="https://media.tenor.com/8Y1OBCtpf4AAAAAi/spider-man-no-way-home-marvel-studios.gif"
           alt=""
         />
