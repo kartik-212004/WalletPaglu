@@ -82,4 +82,7 @@ pnpm start
 ### Backup and Restore (For When Life Happens)
 
 - **Backup**: On the wallet page, click "Backup Wallet" to download a JSON file containing your wallet information (like taking a photo of your house before the hurricane)
-- **Restore**: On th
+- *Restore*: On the wallet creation page, click "Import Wallet Backup" and select your backup file
+
+### License
+This project is licensed under the MIT License - see the LICENSE file for details. (Basically, do what you want but don't blame me if things go wrong)
