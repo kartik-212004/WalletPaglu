@@ -50,7 +50,7 @@ export default function Home() {
             href={"/wallet"}
             className="w-full sm:w-auto"
           >
-            <Button className="text-sm font-mono w-full sm:w-auto">Enterium</Button>
+            <Button className="text-sm font-mono w-full sm:w-auto">Etherium</Button>
           </Link>
           <Link
             onClick={() => {
