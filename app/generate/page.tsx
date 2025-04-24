@@ -289,34 +289,39 @@ function GenerateContent() {
         </div>
         <div className="border font-mono dark:text-gray-200 dark:bg-neutral-800 bg-neutral-100 px-4 sm:px-8 md:px-12 font-normal text-base sm:text-lg md:text-xl rounded-lg py-3 border-customgray space-y-3">
           <div className="flex items-center flex-wrap">
-            <span className="mr-2">Public Key: </span>
-            <div
-              onClick={handleCopyPublicKey}
-              className="w-full md:w-auto md:flex-1 overflow-x-auto whitespace-nowrap text-xs sm:text-sm md:text-base dark:text-gray-400 break-all"
-            >
-              {publicKey}
+            <span className="mr-2 whitespace-nowrap">Public Key: </span>
+            <div className="relative flex-1 min-w-0">
+              <div
+                onClick={handleCopyPublicKey}
+                className="w-full text-xs sm:text-sm md:text-base dark:text-gray-400 break-all pr-10 cursor-pointer hover:text-gray-300 transition-colors"
+                title="Click to copy"
+              >
+                {publicKey}
+              </div>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2"></div>
             </div>
           </div>
           <div className="flex font-mono items-center flex-wrap">
-            <span className="mr-2">Private Key: </span>
-            <div
-              onClick={handleCopyPrivateKey}
-              className="w-full md:w-auto md:flex-1 overflow-x-auto whitespace-nowrap text-xs sm:text-sm md:text-base bg-transparent dark:text-gray-300"
-            >
+            <span className="mr-2 whitespace-nowrap">Private Key: </span>
+            <div className="relative flex-1 min-w-0">
               <input
                 type={showPrivateKey ? "text" : "password"}
                 value={privateKey ?? ""}
                 readOnly
-                className="w-full dark:text-gray-400 bg-transparent outline-none"
+                onClick={handleCopyPrivateKey}
+                className="w-full dark:text-gray-400 bg-transparent outline-none pr-10 text-xs sm:text-sm md:text-base cursor-pointer hover:text-gray-300 transition-colors"
+                title={
+                  showPrivateKey ? "Click to copy" : "Show private key to copy"
+                }
               />
-            </div>
-            <div className="ml-auto flex space-x-2">
-              <button
-                onClick={() => setShowPrivateKey(!showPrivateKey)}
-                className="dark:hover:text-gray-300 dark:text-white text-black hover:text-gray-950 transition"
-              >
-                {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 flex items-center space-x-2">
+                <button
+                  onClick={() => setShowPrivateKey(!showPrivateKey)}
+                  className="dark:hover:text-gray-300 dark:text-white text-black hover:text-gray-950 transition"
+                >
+                  {showPrivateKey ? <EyeOff size={20} /> : <Eye size={20} />}
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -365,15 +370,15 @@ function GenerateContent() {
               backed up your private key or recovery phrase.
             </p>
             <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 sm:justify-end">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={handleCancelDelete}
                 className="w-full sm:w-auto"
               >
                 Cancel
               </Button>
-              <Button 
-                variant="destructive" 
+              <Button
+                variant="destructive"
                 onClick={clearWalletData}
                 className="w-full sm:w-auto"
               >
